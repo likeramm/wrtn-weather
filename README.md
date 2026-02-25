@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 날씨 정보 웹 서비스 요구 사항 명세서 (PRD)
 
-## Getting Started
+## 1. 프로젝트 개요
+* **프로젝트명:** (가칭) Simple Weather
+* **서비스 목적:** 사용자가 원하는 지역의 날씨 정보를 직관적이고 군더더기 없는 UI로 빠르게 확인할 수 있도록 제공
+* **주요 기술 스택:** Next.js, Tailwind CSS, shadcn/ui
 
-First, run the development server:
+## 2. 사용자 기능 요구 사항 (Functional Requirements)
+* **FR-01. 지역 검색 및 선택**
+  * 사용자는 검색창에 지역명(예: 충청남도 당진시, 서울특별시 강남구 등)을 입력하여 날씨 정보를 조회할 수 있어야 한다.
+  * 검색 시 자동 완성 또는 연관 검색어 드롭다운을 제공하여 사용성을 높인다.
+* **FR-02. 현재 위치 기반 날씨 제공**
+  * 웹 브라우저의 Geolocation API를 활용하여 접속 시 사용자의 현재 위치 날씨를 기본으로 제공한다.
+  * 위치 정보 제공 동의 거부 시, 기본 설정된 특정 지역의 날씨를 보여준다.
+* **FR-03. 날씨 정보 대시보드**
+  * **현재 날씨:** 현재 기온, 체감 온도, 최고/최저 기온, 날씨 상태(맑음, 흐림, 비 등)를 텍스트와 직관적인 아이콘으로 표시한다.
+  * **상세 지표:** 습도, 풍속, 강수 확률, 자외선 지수 등 부가적인 날씨 데이터를 제공한다.
+* **FR-04. 일기 예보 기능**
+  * **시간대별 예보:** 현재 시간 기준 최소 12시간 동안의 시간당 날씨 변화를 가로 스크롤 또는 그래프 형태로 제공한다.
+  * **주간 예보:** 향후 5~7일간의 날씨 트렌드(최고/최저 기온, 날씨 아이콘)를 리스트 형태로 제공한다.
+* **FR-05. 최근 검색 및 즐겨찾기**
+  * 사용자가 최근 검색한 지역 리스트를 제공하여 빠른 재검색을 돕는다.
+  * (선택) 로컬 스토리지(Local Storage)를 활용해 즐겨찾는 지역을 저장하고 탭으로 이동할 수 있게 한다.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 3. 비기능 요구 사항 (Non-Functional Requirements)
+* **NFR-01. UI/UX 디자인 (shadcn/ui & Tailwind CSS 활용)**
+  * **디자인 컨셉:** 모던(Modern), 심플(Simple), 미니멀리즘(Minimalism). 복잡한 요소를 배제하고 날씨 데이터의 가독성에 집중한다.
+  * **컴포넌트:** shadcn/ui의 Card, Input, Button, Scroll Area 등을 조합하여 일관성 있는 인터페이스를 구축한다.
+  * **반응형 웹:** Tailwind CSS를 활용하여 모바일, 태블릿, 데스크톱 환경 모두에서 최적화된 레이아웃을 제공한다.
+* **NFR-02. 성능 및 렌더링 (Next.js 활용)**
+  * Next.js의 특성을 살려 초기 로딩 속도를 최적화하고, 검색 엔진 최적화(SEO)를 고려하여 페이지를 구성한다.
+  * 외부 날씨 API 호출 시 지연 시간을 최소화하고, 데이터 로딩 중에는 스켈레톤(Skeleton) UI를 노출하여 사용자 경험을 개선한다.
+* **NFR-03. 신뢰성**
+  * 신뢰할 수 있는 외부 날씨 데이터 API(예: OpenWeatherMap, 기상청 API 등)를 안정적으로 연동하여 정확한 정보를 제공한다.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 4. 향후 확장 가능성 (Future Scope)
+* 날씨 상태(맑음, 비, 눈 등)에 따라 전체 페이지의 배경 테마(색상, 미세한 애니메이션)가 동적으로 변하는 기능 추가
+* 다크 모드(Dark Mode) 및 라이트 모드(Light Mode) 완벽 지원
