@@ -85,17 +85,17 @@ export async function GET(request: NextRequest) {
     });
 
     const dailyForecasts = Array.from(dailyMap.entries()).slice(0, 5).map(([, data]) => ({
-      dt: data.item.dt,
+      dt: data.item.dt as number,
       temp: {
         min: Math.round(Math.min(...data.temps)),
         max: Math.round(Math.max(...data.temps)),
       },
       humidity: (data.item.main as Record<string, number>).humidity,
       weather: {
-        id: (data.item.weather as Array<Record<string, unknown>>)[0].id,
-        main: (data.item.weather as Array<Record<string, unknown>>)[0].main,
-        description: (data.item.weather as Array<Record<string, unknown>>)[0].description,
-        icon: (data.item.weather as Array<Record<string, unknown>>)[0].icon,
+        id: (data.item.weather as Array<Record<string, unknown>>)[0].id as number,
+        main: (data.item.weather as Array<Record<string, unknown>>)[0].main as string,
+        description: (data.item.weather as Array<Record<string, unknown>>)[0].description as string,
+        icon: (data.item.weather as Array<Record<string, unknown>>)[0].icon as string,
       },
       pop: Math.round(data.pop),
     }));

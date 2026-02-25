@@ -30,7 +30,7 @@ export function SearchLocation({
   const [query, setQuery] = useState("");
   const [mounted, setMounted] = useState(false);
   const { results, loading, search, clearResults } = useSearch();
-  const debounceRef = useRef<NodeJS.Timeout>();
+  const debounceRef = useRef<NodeJS.Timeout>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
